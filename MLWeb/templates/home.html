@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .title {
+            font-size: 24px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 900;
+            font-style: italic;
+        }
+
+        .box {
+            max-width: 50%;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            padding: 24px;
+            background-color: aliceblue;
+            box-shadow: 2px 1px aliceblue;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .box .car-form {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .box .car-form select {
+            height: 2.5rem;
+            width: 500px;
+            background-color: none;
+            color: gray;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .box .car-form button {
+            height: 40px;
+            border-radius: 25%;
+            font-size: 14px;
+            background-color: chartreuse;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">Hello World</h1>
+    <div class="box">
+        <form action="/predict" method="post" class="car-form">
+            <select name="com" id="">
+                <option value="">Select Company of Car</option>
+                {% for c in company %}
+                <option value="{{c}}">{{c}}</option>
+                {% endfor %}
+            </select>
+            <select name="model" id="">
+                <option value="">Select Model of Car</option>
+                {% for m in model %}
+                <option value="{{m}}">{{m}}</option>
+                {% endfor %}
+            </select>
+            <select name="year" id="">
+                <option value="">Select Model Year of Car</option>
+                {% for y in year %}
+                <option value="{{y}}">{{y}}</option>
+                {% endfor %}
+            </select>
+            <select name="fuel" id="">
+                <option value="">Select FuelType of Car</option>
+                {% for f in fuel %}
+                <option value="{{f}}">{{f}}</option>
+                {% endfor %}
+            </select>
+            <div>
+                <label for="">KMS Driven</label>
+                <Input name="kms" type="text" placeholder="Enter KMS Driven" />
+            </div>
+
+            <button type="submit">Predict the Price</button>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,1 @@
+return render_template("home.html",company=company,model=model,year=year,fuel=fueltype)
