@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Selection</title>
+    <style>
+        .form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="" class="form">
+        <label for="company">Select Company:</label>
+        <select name="company" id="company" onchange="loadCarModels()">
+            <option value="">-- Select Company --</option>
+            {% for comp in company_list | unique %}
+                <option value="{{ comp }}">{{ comp }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="car_model">Select Car Model:</label>
+        <select name="car_model" id="car_model">
+            <option value="">-- Select Car Model --</option>
+        </select>
+
+        <label for="year">Select Year:</label>
+        <select name="year" id="year">
+            {% for y in year %}
+                <option value="{{ y }}">{{ y }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="fuel">Select Fuel Type:</label>
+        <select name="fuel" id="fuel">
+            {% for f in fuel %}
+                <option value="{{ f }}">{{ f }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <!-- Store car models as hidden elements -->
+    <div id="car-options" style="display:none;">
+        {% for comp, model in company_list|zip(car_name_list) %}
+            <div class="car-option" data-company="{{ comp }}" data-model="{{ model }}"></div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function loadCarModels() {
+            var company = document.getElementById("company").value;
+            var carModelSelect = document.getElementById("car_model");
+
+            // Clear existing options
+            carModelSelect.innerHTML = '<option value="">-- Select Car Model --</option>';
+
+            // Find matching car models
+            var options = document.querySelectorAll('.car-option');
+            options.forEach(option => {
+                if (option.dataset.company === company) {
+                    var newOption = document.createElement("option");
+                    newOption.value = option.dataset.model;
+                    newOption.textContent = option.dataset.model;
+                    carModelSelect.appendChild(newOption);
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
